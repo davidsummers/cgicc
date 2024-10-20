@@ -43,11 +43,11 @@
 #include <vector>
 #include <string>
 
-#include "CgiDefs.h"
-#include "FormEntry.h"
-#include "FormFile.h"
-#include "CgiInput.h"
-#include "CgiEnvironment.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/FormEntry.h"
+#include "cgicc/FormFile.h"
+#include "cgicc/CgiInput.h"
+#include "cgicc/CgiEnvironment.h"
 
 namespace cgicc {
   

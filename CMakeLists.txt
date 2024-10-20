@@ -2,17 +2,22 @@
 # cgicc 3.2.10 cmakified
 # by Michal Papierski <michal@papierski.net>
 #
-cmake_minimum_required (VERSION 2.8.7)
-project (cgicc)
+# cgicc 3.2.20 cmakified
+# by David Summers <david@summersoft.fay-ar.us>
+#
+cmake_minimum_required( VERSION 3.26 )
+project( cgicc )
 
 option (cgicc_build_example "Build cgicc example app" OFF)
 option (cgicc_build_demo "Build cgicc demos" OFF)
 option (cgicc_build_doc "Build cgicc documentation" OFF)
 
-set (VERSION "3.2.10")
+set( VERSION "3.2.10" )
+
 execute_process (COMMAND hostname
 	OUTPUT_VARIABLE HOST
 	OUTPUT_STRIP_TRAILING_WHITESPACE)
+
 # Platform checks
 include (CheckIncludeFiles)
 check_include_files (dlfcn.h HAVE_DLFCN_H)
@@ -51,84 +56,100 @@ check_include_files (sys/types.h HAVE_SYS_TYPES_H)
 check_include_files (sys/utsname.h HAVE_SYS_UTSNAME_H)
 check_symbol_exists (uname sys/utsname.h HAVE_UNAME)
 check_include_files (unistd.h HAVE_UNISTD_H)
-include_directories (
+
+include_directories(
 	.
-	${CMAKE_CURRENT_BINARY_DIR})
-add_custom_command (
+	${CMAKE_CURRENT_BINARY_DIR} )
+
+add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cgicc/CgiDefs.h
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/cgicc
 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/cgicc/CgiDefs.h.in ${CMAKE_CURRENT_BINARY_DIR}/cgicc/CgiDefs.h)
+
 configure_file (
 	${CMAKE_CURRENT_SOURCE_DIR}/cgicc/config.h.in
-	${CMAKE_CURRENT_BINARY_DIR}/config.h)
-add_definitions (-DHAVE_CONFIG_H)
-set (cgicc_SOURCES
-	cgicc/CgiEnvironment.cpp
-	cgicc/CgiInput.cpp
-	cgicc/CgiUtils.cpp
-	cgicc/Cgicc.cpp
-	cgicc/FormEntry.cpp
-	cgicc/FormFile.cpp
-	cgicc/HTMLAttribute.cpp
-	cgicc/HTMLAttributeList.cpp
-	cgicc/HTMLDoctype.cpp
-	cgicc/HTMLElement.cpp
-	cgicc/HTMLElementList.cpp
-	cgicc/HTTPContentHeader.cpp
-	cgicc/HTTPCookie.cpp
-	cgicc/HTTPHTMLHeader.cpp
-	cgicc/HTTPHeader.cpp
-	cgicc/HTTPPlainHeader.cpp
-	cgicc/HTTPRedirectHeader.cpp
-	cgicc/HTTPResponseHeader.cpp
-	cgicc/HTTPStatusHeader.cpp
-	cgicc/HTTPXHTMLHeader.cpp
-	cgicc/MStreamable.cpp
-	cgicc/XHTMLDoctype.cpp
-	cgicc/XMLPI.cpp)
-set (cgicc_HEADERS
-	cgicc/Cgicc.h
-	cgicc/CgiEnvironment.h
-	cgicc/CgiInput.h
-	cgicc/CgiUtils.h
-	cgicc/FormEntry.h
-	cgicc/FormFile.h
-	cgicc/HTMLAtomicElement.h
-	cgicc/HTMLAttribute.h
-	cgicc/HTMLAttributeList.h
-	cgicc/HTMLBooleanElement.h
-	cgicc/HTMLClasses.h
-	cgicc/HTMLDoctype.h
-	cgicc/HTMLElement.h
-	cgicc/HTMLElementList.h
-	cgicc/HTTPContentHeader.h
-	cgicc/HTTPCookie.h
-	cgicc/HTTPHeader.h
-	cgicc/HTTPHTMLHeader.h
-	cgicc/HTTPPlainHeader.h
-	cgicc/HTTPRedirectHeader.h
-	cgicc/HTTPResponseHeader.h
-	cgicc/HTTPStatusHeader.h
-	cgicc/HTTPXHTMLHeader.h
-	cgicc/MStreamable.h
-	cgicc/XHTMLDoctype.h
-	cgicc/XMLDeclaration.h
-	cgicc/XMLPI.h
-	${CMAKE_CURRENT_BINARY_DIR}/cgicc/CgiDefs.h
-	${CMAKE_CURRENT_BINARY_DIR}/config.h)
-source_group ("Header Files"
-	FILES ${cgicc_HEADERS})
-add_library (cgicc
-	${cgicc_SOURCES}
-	${cgicc_HEADERS})
-if (cgicc_build_example)
-	add_subdirectory (example)
-endif ()
-if (cgicc_build_demo)
-	add_subdirectory (demo)
-endif ()
+	${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
-if (cgicc_build_doc) 
+set( cgicc_SOURCES
+	 cgicc/CgiEnvironment.cpp
+	 cgicc/CgiInput.cpp
+	 cgicc/CgiUtils.cpp
+	 cgicc/Cgicc.cpp
+	 cgicc/FormEntry.cpp
+	 cgicc/FormFile.cpp
+	 cgicc/HTMLAttribute.cpp
+	 cgicc/HTMLAttributeList.cpp
+	 cgicc/HTMLDoctype.cpp
+	 cgicc/HTMLElement.cpp
+	 cgicc/HTMLElementList.cpp
+	 cgicc/HTTPContentHeader.cpp
+	 cgicc/HTTPCookie.cpp
+	 cgicc/HTTPHTMLHeader.cpp
+	 cgicc/HTTPHeader.cpp
+	 cgicc/HTTPPlainHeader.cpp
+	 cgicc/HTTPRedirectHeader.cpp
+	 cgicc/HTTPResponseHeader.cpp
+	 cgicc/HTTPStatusHeader.cpp
+	 cgicc/HTTPXHTMLHeader.cpp
+	 cgicc/MStreamable.cpp
+	 cgicc/XHTMLDoctype.cpp
+	 cgicc/XMLPI.cpp )
+
+set( cgicc_HEADERS
+	 cgicc/Cgicc.h
+	 cgicc/CgiEnvironment.h
+	 cgicc/CgiInput.h
+	 cgicc/CgiUtils.h
+	 cgicc/FormEntry.h
+	 cgicc/FormFile.h
+	 cgicc/HTMLAtomicElement.h
+	 cgicc/HTMLAttribute.h
+	 cgicc/HTMLAttributeList.h
+	 cgicc/HTMLBooleanElement.h
+	 cgicc/HTMLClasses.h
+	 cgicc/HTMLDoctype.h
+	 cgicc/HTMLElement.h
+	 cgicc/HTMLElementList.h
+	 cgicc/HTTPContentHeader.h
+	 cgicc/HTTPCookie.h
+	 cgicc/HTTPHeader.h
+	 cgicc/HTTPHTMLHeader.h
+	 cgicc/HTTPPlainHeader.h
+	 cgicc/HTTPRedirectHeader.h
+	 cgicc/HTTPResponseHeader.h
+	 cgicc/HTTPStatusHeader.h
+	 cgicc/HTTPXHTMLHeader.h
+	 cgicc/MStreamable.h
+	 cgicc/XHTMLDoctype.h
+	 cgicc/XMLDeclaration.h
+	 cgicc/XMLPI.h
+	 ${CMAKE_CURRENT_BINARY_DIR}/cgicc/CgiDefs.h
+	 ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+
+source_group( "Header Files"
+	FILES ${cgicc_HEADERS} )
+
+add_library(cgicc
+	${cgicc_SOURCES}
+	${cgicc_HEADERS} )
+
+message( STATUS "VERSION = ${VERSION}" )
+
+target_compile_definitions( cgicc PUBLIC
+                            HAVE_CONFIG_H
+							VERSION=${VERSION}
+							HOST=${HOST}
+                          )
+
+if ( cgicc_build_example )
+	add_subdirectory( example )
+endif( )
+
+if ( cgicc_build_demo )
+	add_subdirectory( demo )
+endif( )
+
+if ( cgicc_build_doc ) 
 	find_package(Doxygen)
 	if (NOT DOXYGEN_FOUND)
 		message(FATAL_ERROR 
@@ -151,4 +172,4 @@ if (cgicc_build_doc)
 				
 	add_custom_target(docs 
 				DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
-endif ()
+endif( )

@@ -37,10 +37,10 @@
 #include <string>
 #include <vector>
 
-#include "CgiDefs.h"
-#include "MStreamable.h"
-#include "HTMLAttribute.h"
-#include "HTMLElement.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
+#include "cgicc/HTMLAttribute.h"
+#include "cgicc/HTMLElement.h"
 
 namespace cgicc {
   

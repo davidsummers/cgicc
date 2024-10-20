@@ -38,9 +38,9 @@
 #include <iostream>
 #include <vector>
 
-#include "CgiDefs.h"
-#include "MStreamable.h"
-#include "HTMLAttribute.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
+#include "cgicc/HTMLAttribute.h"
 
 namespace cgicc {
 

@@ -41,8 +41,8 @@
 #include <string>
 #include <iostream>
 
-#include "CgiDefs.h"
-#include "MStreamable.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
 
 namespace cgicc {
   

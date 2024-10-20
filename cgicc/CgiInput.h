@@ -37,7 +37,7 @@
 
 #include <string>
 
-#include "CgiDefs.h"
+#include "cgicc/CgiDefs.h"
 
 namespace cgicc {
 

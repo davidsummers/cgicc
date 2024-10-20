@@ -33,8 +33,8 @@
 #include <iterator>
 #include <stdexcept>
 
-#include "CgiUtils.h"
-#include "Cgicc.h"
+#include "cgicc/CgiUtils.h"
+#include "cgicc/Cgicc.h"
 
 
 namespace cgicc {
@@ -219,13 +219,16 @@ const char*
 cgicc::Cgicc::getCompileTime() 					const
 { return __TIME__; }
 
+#define ZSTR( s ) STR( s )
+#define STR( x ) #x
+
 const char*
 cgicc::Cgicc::getVersion() 					const
-{ return VERSION; }
+{ return STR( VERSION) ; }
 
 const char*
 cgicc::Cgicc::getHost() 					const
-{ return HOST; }
+{ return STR( HOST ); }
 
 void
 cgicc::Cgicc::save(const std::string& filename) 		const

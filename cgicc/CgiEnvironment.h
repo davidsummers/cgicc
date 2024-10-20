@@ -41,10 +41,10 @@
 #include <vector>
 #include <cstdlib>
 
-#include "CgiDefs.h"
-#include "CgiUtils.h"
-#include "CgiInput.h"
-#include "HTTPCookie.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/CgiUtils.h"
+#include "cgicc/CgiInput.h"
+#include "cgicc/HTTPCookie.h"
 
 namespace cgicc {
 

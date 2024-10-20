@@ -43,8 +43,8 @@
 #include <climits>
 #include <cfloat>
 
-#include "CgiDefs.h"
-#include "CgiUtils.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/CgiUtils.h"
 
 namespace cgicc {
   

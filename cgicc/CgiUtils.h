@@ -39,7 +39,7 @@
 #include <string>
 #include <fstream>
 
-#include "CgiDefs.h"
+#include "cgicc/CgiDefs.h"
 
 
 namespace cgicc {

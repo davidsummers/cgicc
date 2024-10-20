@@ -31,9 +31,9 @@
 
 #include <string>
 
-#include "CgiDefs.h"
-#include "MStreamable.h"
-#include "HTMLAttributeList.h"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
+#include "cgicc/HTMLAttributeList.h"
 
 namespace cgicc {
 /*! \class XMLPI XMLPI.h cgicc/XMLPI.h 
