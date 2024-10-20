@@ -44,8 +44,7 @@
 #include <string>
 #include <map>
 
-#include <fcgio.h>
-
+#include "fcgio.h"
 
 #include "cgicc/CgiInput.h"
 
@@ -121,13 +120,9 @@ namespace cgicc {
      * \return The value of the requested environment variable, or an empty
      * string if not found.
      */
-    virtual inline std::string getenv(const char *varName) const
+    virtual inline std::string getenv(const char *varName)
     {
-      fEnv_t::const_iterator i = fEnv.find(varName);
-      if(i == fEnv.end())
-        return std::string();
-      else
-        return i->second;
+      return fEnv[varName];
     }
     //@}
     
@@ -150,8 +145,7 @@ namespace cgicc {
     fcgi_streambuf 			fOutBuf;
     fcgi_streambuf 			fErrBuf;
     std::ostream 			fErr;
-    typedef std::map<std::string, std::string> 	fEnv_t;
-    fEnv_t fEnv;
+    std::map<std::string, std::string> 	fEnv;
   };
   
 } // namespace cgicc

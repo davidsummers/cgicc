@@ -1,3 +1,41 @@
+2017-06-23 Sebastien DIAZ <sebastien.diaz@gmail.com>
+	Corrected Bugs on 3.2.17
+       	   bug #46426: Pkg-config file does not provide flags for include path or the library itself. From Josh Watts.
+	   bug #48677: Generated index.html is empty. From Anonymous.	
+	   bug #49120: cgicc should not call exit(). From Thomas Pircher.
+           bug #49557: XHTMLDoctype.h fails to include MStreamable.h . From Thomas Pircher.
+	   
+
+2014-12-07 Sebastien DIAZ <sebastien.diaz@gmail.com>
+	Patches on 3.2.16
+	   patch #7845: HTTP PUT method support from Yury Knigin 
+	   patch #8581: Added HTML5 Support from Tim O'Neil
+
+2014-06-09 Sebastien DIAZ <sebastien.diaz@gmail.com>
+	Corrected Bugs on 3.2.15
+	   bug #34265: missing opportunity to limiy post DATA upload
+	   bug #34178: cgicc multipart/form-data timeout on binary data upload
+	   
+2014-04-23 Sebastien DIAZ  <sebastien.diaz@gmail.com>
+	New 3.2.14
+        Remove code warnings
+        Correct Makefile.am and configure.ac
+        bug #41248: CgiDefs.h incorrectly includes config.h
+        
+2014-03-28 Sebastien DIAZ  <sebastien.diaz@gmail.com>
+	New 3.2.13
+        Remove code warnings
+
+2014-01-01 Sebastien DIAZ  <sebastien.diaz@gmail.com>
+        Corrected Bugs on 3.2.12
+	  bug #38141: multi-character character constant warning
+          bug #38224: incorrect soname (issue #38053) is not fixed
+          bug #40329: Wrong separator in multipart/form-data
+
+2013-12-31 Sebastien DIAZ  <sebastien.diaz@gmail.com>
+        Corrected Bugs on 3.2.11
+	Add Mac Os compilation        
+	
 2013-01-14 Sebastien DIAZ  <sebastien.diaz@gmail.com>
         Corrected Bugs on 3.2.10
         Savannah bugs:

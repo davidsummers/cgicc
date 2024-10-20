@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiInput.h,v 1.7 2007/07/02 18:48:17 sebdiaz Exp $
+ *  $Id: CgiInput.h,v 1.8 2014/04/23 20:55:03 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -37,7 +37,7 @@
 
 #include <string>
 
-#include "cgicc/CgiDefs.h"
+#include "CgiDefs.h"
 
 namespace cgicc {
 
@@ -155,7 +155,7 @@ namespace cgicc {
      * \return The value of the requested environment variable, or an empty
      * string if not found.
      */
-    virtual std::string getenv(const char *varName) const;
+    virtual std::string getenv(const char *varName);
     //@}
   };
   

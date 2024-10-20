@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.cpp,v 1.27 2013/01/12 19:57:04 sebdiaz Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.31 2017/06/22 20:26:35 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -38,7 +38,7 @@
 #  include <stdio.h>
 #endif
 
-#include "cgicc/CgiEnvironment.h"
+#include "CgiEnvironment.h"
 
 // ========== Constructor/Destructor
 
@@ -64,11 +64,16 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 #  endif
 #endif
      
-  if(stringsAreEqual(fRequestMethod, "post")) {
+  if(stringsAreEqual(fRequestMethod, "post") || stringsAreEqual(fRequestMethod, "put")) {
     // Don't use auto_ptr, but vector instead
     // Bug reported by shinra@j10n.org
     std::vector<char> data(fContentLength);
     
+    if(getenv("CGICC_MAX_CONTENTLENGTH")&&getContentLength()>(long unsigned int)atoi(getenv("CGICC_MAX_CONTENTLENGTH")))
+    {
+        throw std::runtime_error("Malformed input");
+    }
+    else
     // If input is 0, use the default implementation of CgiInput
 	if ( getContentLength() )
 	{
@@ -301,7 +306,7 @@ cgicc::CgiEnvironment::save(const std::string& filename) 	const
   writeString(file, fReferrer);
   writeString(file, fCookie);
   
-  if(stringsAreEqual(fRequestMethod, "post"))
+  if(stringsAreEqual(fRequestMethod, "post") || stringsAreEqual(fRequestMethod, "put"))
     writeString(file, fPostData);
 
   if(file.bad() || file.fail())
@@ -347,7 +352,7 @@ cgicc::CgiEnvironment::restore(const std::string& filename)
   fReferrer 		= readString(file);
   fCookie 		= readString(file);
   
-  if(stringsAreEqual(fRequestMethod, "post"))
+  if(stringsAreEqual(fRequestMethod, "post") || stringsAreEqual(fRequestMethod, "put"))
     fPostData = readString(file);
 
   file.close();

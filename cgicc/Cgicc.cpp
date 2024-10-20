@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.30 2013/01/12 11:11:46 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.35 2023/10/22 07:46:41 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -24,15 +24,17 @@
 #ifdef __GNUG__
 #  pragma implementation
 #endif
-
+#if HAVE_CONFIG_H
+#  include "config.h"
+#endif
 #include <new>
 #include <algorithm>
 #include <functional>
 #include <iterator>
 #include <stdexcept>
 
-#include "cgicc/CgiUtils.h"
-#include "cgicc/Cgicc.h"
+#include "CgiUtils.h"
+#include "Cgicc.h"
 
 
 namespace cgicc {
@@ -324,11 +326,11 @@ cgicc::Cgicc::findEntries(const std::string& param,
   result.clear();
 
   if(byName) {
-    copy_if(fFormData.begin(), fFormData.end(), 
+    cgicc::copy_if(fFormData.begin(), fFormData.end(), 
 	    std::back_inserter(result),FE_nameCompare(param));
   }
   else {
-    copy_if(fFormData.begin(), fFormData.end(), 
+    cgicc::copy_if(fFormData.begin(), fFormData.end(), 
 	    std::back_inserter(result), FE_valueCompare(param));
   }
 
@@ -410,12 +412,19 @@ cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content
     std::string 		bType 	= "boundary=";
     std::string::size_type 	pos 	= content_type.find(bType);
 
+    // Remove next sentence
+    std::string                 commatek=";";
+
     // generate the separators
     std::string sep1 = content_type.substr(pos + bType.length());
+    if (sep1.find(";")!=std::string::npos)
+       sep1=sep1.substr(0,sep1.find(";"));
     sep1.append("\r\n");
     sep1.insert(0, "--");
 
     std::string sep2 = content_type.substr(pos + bType.length());
+    if (sep2.find(";")!=std::string::npos)
+       sep2=sep2.substr(0,sep2.find(";"));
     sep2.append("--\r\n");
     sep2.insert(0, "--");
 
@@ -482,7 +491,12 @@ cgicc::Cgicc::parseMIME(const std::string& data)
 
   // Extract the value - there is still a trailing CR/LF to be subtracted off
   std::string::size_type valueStart = headLimit + end.length();
-  std::string value = data.substr(valueStart, data.length() - valueStart - 2);
+  int lengthCorrection = 0;
+  std::string endData = "\r\n";
+  if (data.length() > 2 && std::equal(endData.rbegin(), endData.rend(), data.rbegin())) {
+    lengthCorrection = 2;
+  }
+  std::string value = data.substr(valueStart, data.length() - valueStart - lengthCorrection);
 
   // Parse the header - pass trailing CR/LF x 2 to parseHeader
   MultipartHeader head = parseHeader(data.substr(0, valueStart));
